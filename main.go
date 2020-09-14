@@ -26,5 +26,5 @@ func main() {
 			userRouter.POST("/reset", user.Reset)
 		}
 	}
-	r.Run()
+	r.Run(":8082")
 }
