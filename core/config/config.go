@@ -1,4 +1,4 @@
-package confutil
+package config
 
 import (
 	"fmt"
@@ -7,11 +7,12 @@ import (
 
 var instance *viper.Viper
 
-func init()  {
+func Init()  {
+	instance = viper.New()
 	instance.SetConfigName("config")
 	instance.SetConfigType("ini")
-	instance.AddConfigPath("conf")
-	err := viper.ReadInConfig() // Find and read the config file
+	instance.AddConfigPath("config")
+	err := instance.ReadInConfig() // Find and read the config file
 	if err != nil { // Handle errors reading the config file
 		panic(fmt.Errorf("Fatal error config file: %s \n", err))
 	}

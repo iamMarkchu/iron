@@ -2,20 +2,18 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
-	"iron/app/controllers/user"
-	"net/http"
+	"github.com/iamMarkchu/iron/app/http/user"
+	"github.com/iamMarkchu/iron/core"
+	c "github.com/iamMarkchu/iron/core/config"
 )
 
 func main() {
+	core.Init()
+	// http
 	r := gin.Default()
+	// api router
 	api := r.Group("/api")
 	{
-		// ping
-		api.GET("/ping", func(c *gin.Context) {
-			c.JSON(http.StatusOK, gin.H{
-				"message": "ping",
-			})
-		})
 		// user模块
 		userRouter := api.Group("/users")
 		{
@@ -26,5 +24,5 @@ func main() {
 			userRouter.POST("/reset", user.Reset)
 		}
 	}
-	r.Run(":8082")
+	r.Run(c.GetInstance().GetString("common.webPort"))
 }

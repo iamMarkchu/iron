@@ -1,4 +1,4 @@
-package models
+package model
 
 import "time"
 
@@ -17,5 +17,5 @@ type User struct {
 }
 
 func (m *User) TableName() string {
-	return "tt_users"
+	return "iron_users"
 }
