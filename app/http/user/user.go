@@ -4,6 +4,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/iamMarkchu/iron/app/http/request"
 	"github.com/iamMarkchu/iron/app/service"
+	"github.com/iamMarkchu/iron/core/auth/jwt"
 	"net/http"
 )
 
@@ -39,18 +40,20 @@ func Login(ctx *gin.Context) {
 	var (
 		req request.LoginReq
 		userService = service.NewUserService()
+		auth jwt.Auth
 		err error
 	)
 	if err = ctx.ShouldBindJSON(&req); err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{"message": err.Error()})
 		return
 	}
-	if err = userService.Login(ctx, req); err != nil {
+	if auth, err = userService.Login(ctx, req); err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{"message": err.Error()})
 		return
 	}
 	ctx.JSON(http.StatusOK, gin.H{
 		"message": "/api/users/login [post]",
+		"data": auth,
 	})
 }
 
