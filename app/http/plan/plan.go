@@ -24,7 +24,7 @@ func Create(ctx *gin.Context)  {
 	}
 	if id,err = planService.Create(ctx, req); err != nil {
 		ctx.JSON(http.StatusOK, gin.H{
-			"message": err,
+			"message": err.Error(),
 		})
 		return
 	}

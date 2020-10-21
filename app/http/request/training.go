@@ -1,14 +1,12 @@
 package request
 
-import "time"
-
 type CreateTrainingReq struct {
 	TrainingDate    string                    `json:"training_date"`
 	PlanId          int                       `json:"plan_id"`
-	StartTime       time.Time                 `json:"start_time" time_format:"2006-01-02"`
-	EndTime         time.Time                 `json:"end_time" time_format:"2006-01-02"`
+	StartTime       string                 `json:"start_time"`
+	EndTime         string                 `json:"end_time"`
 	Description     string                    `json:"description"`
-	TrainingDetails []*CreateTrainingLogItemReq `json:"plan_details"`
+	TrainingDetails []*CreateTrainingLogItemReq `json:"training_details"`
 }
 
 type CreateTrainingLogItemReq struct {

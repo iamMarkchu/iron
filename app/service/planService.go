@@ -16,12 +16,13 @@ func (s *planService) Create(ctx *gin.Context, req request.CreatePlanReq) (uint6
 	var (
 		o = orm.GetInstance()
 		planModel model.Plan
+		err error
 	)
-	o.Begin()
+	tx := o.Begin()
 	planModel.PlanName = req.PlanName
 	planModel.Status = model.StatusInit
 	planModel.UserId = uint64(ctx.GetInt("userId"))
-	o.Create(&planModel)
+	tx.Create(&planModel)
 	for _, item := range req.PlanDetails {
 		detailItemModel := model.PlanDetail{}
 		detailItemModel.PlanId = planModel.Id
@@ -31,12 +32,12 @@ func (s *planService) Create(ctx *gin.Context, req request.CreatePlanReq) (uint6
 		detailItemModel.Break = item.Break
 		detailItemModel.UserId = planModel.UserId
 		detailItemModel.Status = model.StatusInit
-		if o.Create(&detailItemModel).Error != nil {
-			o.Rollback()
+		if err = tx.Create(&detailItemModel).Error; err != nil {
+			tx.Rollback()
 			return 0, errors.New("保存训练详情失败")
 		}
 	}
-	o.Commit()
+	tx.Commit()
 	return planModel.Id, nil
 }
 
