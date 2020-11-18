@@ -2,7 +2,7 @@ package training
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/iamMarkchu/iron/app/http/request"
+	"github.com/iamMarkchu/iron/app/lib/request"
 	"github.com/iamMarkchu/iron/app/model"
 	"github.com/iamMarkchu/iron/app/service"
 	"net/http"
@@ -10,10 +10,10 @@ import (
 
 func Create(ctx *gin.Context) {
 	var (
-		req request.CreateTrainingReq
+		req             request.CreateTrainingReq
 		trainingService = service.NewTrainingService()
-		training *model.Training
-		err error
+		training        *model.Training
+		err             error
 	)
 	if err = ctx.ShouldBindJSON(&req); err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{
@@ -29,6 +29,6 @@ func Create(ctx *gin.Context) {
 	}
 	ctx.JSON(http.StatusOK, gin.H{
 		"message": "训练模块 创建训练",
-		"data": training,
+		"data":    training,
 	})
 }

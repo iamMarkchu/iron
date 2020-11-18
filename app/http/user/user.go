@@ -2,7 +2,7 @@ package user
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/iamMarkchu/iron/app/http/request"
+	"github.com/iamMarkchu/iron/app/lib/request"
 	"github.com/iamMarkchu/iron/app/service"
 	"github.com/iamMarkchu/iron/core/auth/jwt"
 	"net/http"
@@ -16,10 +16,10 @@ import (
 // @params captcha
 func Register(ctx *gin.Context) {
 	var (
-		req request.RegisterReq
+		req         request.RegisterReq
 		userService = service.NewUserService()
-		uid int64
-		err error
+		uid         int64
+		err         error
 	)
 	if err = ctx.ShouldBindJSON(&req); err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{"message": err.Error()})
@@ -31,17 +31,17 @@ func Register(ctx *gin.Context) {
 	}
 	ctx.JSON(http.StatusOK, gin.H{
 		"message": "注册成功!",
-		"data": uid,
+		"data":    uid,
 	})
 }
 
 // 用户登录接口
 func Login(ctx *gin.Context) {
 	var (
-		req request.LoginReq
+		req         request.LoginReq
 		userService = service.NewUserService()
-		auth jwt.Auth
-		err error
+		auth        jwt.Auth
+		err         error
 	)
 	if err = ctx.ShouldBindJSON(&req); err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{"message": err.Error()})
@@ -53,7 +53,7 @@ func Login(ctx *gin.Context) {
 	}
 	ctx.JSON(http.StatusOK, gin.H{
 		"message": "/api/users/login [post]",
-		"data": auth,
+		"data":    auth,
 	})
 }
 
@@ -76,5 +76,21 @@ func Forget(c *gin.Context) {
 func Reset(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{
 		"message": "/api/users/reset [post]",
+	})
+}
+
+func WxLogin(ctx *gin.Context) {
+	var (
+		req         = new(request.WxLoginReq)
+		userService = service.NewUserService()
+		err         error
+	)
+	if err = ctx.ShouldBindJSON(req); err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{"message": err.Error()})
+		return
+	}
+	userService.WxLogin(ctx, req.Code)
+	ctx.JSON(http.StatusOK, gin.H{
+		"message": "/api/users/wxLogin [post]",
 	})
 }

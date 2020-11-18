@@ -2,13 +2,12 @@ package service
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/iamMarkchu/iron/app/http/request"
+	"github.com/iamMarkchu/iron/app/lib/request"
 	"github.com/iamMarkchu/iron/app/model"
 	"github.com/iamMarkchu/iron/core/store/orm"
 )
 
 type movementService struct {
-
 }
 
 func (s *movementService) Create(ctx *gin.Context, req request.CreateMovementReq) (uint64, error) {
@@ -27,7 +26,7 @@ func (s *movementService) Create(ctx *gin.Context, req request.CreateMovementReq
 
 func (s *movementService) GetList(ctx *gin.Context, req request.GetMovementsReq) (movements []model.Movement, err error) {
 	var (
-		o = orm.GetInstance()
+		o      = orm.GetInstance()
 		offset int
 	)
 	if req.CatId > 0 {

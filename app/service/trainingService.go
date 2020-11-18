@@ -2,14 +2,13 @@ package service
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/iamMarkchu/iron/app/http/request"
+	"github.com/iamMarkchu/iron/app/lib/request"
 	"github.com/iamMarkchu/iron/app/model"
 	"github.com/iamMarkchu/iron/core/store/orm"
 	"time"
 )
 
 type trainingService struct {
-
 }
 
 func (s *trainingService) Create(ctx *gin.Context, req request.CreateTrainingReq) (m *model.Training, err error) {
@@ -20,7 +19,7 @@ func (s *trainingService) Create(ctx *gin.Context, req request.CreateTrainingReq
 	m.TrainingDate = req.TrainingDate
 	m.PlanId = uint64(req.PlanId)
 	m.StartTime, _ = time.Parse("2006-01-02 15:04:05", req.StartTime)
-	m.EndTime,_ = time.Parse("2006-01-02 15:04:05", req.EndTime)
+	m.EndTime, _ = time.Parse("2006-01-02 15:04:05", req.EndTime)
 	m.Description = req.Description
 	m.Status = model.StatusInit
 	m.UserId = uint64(ctx.GetInt("userId"))

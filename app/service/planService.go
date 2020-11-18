@@ -3,20 +3,19 @@ package service
 import (
 	"errors"
 	"github.com/gin-gonic/gin"
-	"github.com/iamMarkchu/iron/app/http/request"
+	"github.com/iamMarkchu/iron/app/lib/request"
 	"github.com/iamMarkchu/iron/app/model"
 	"github.com/iamMarkchu/iron/core/store/orm"
 )
 
 type planService struct {
-
 }
 
 func (s *planService) Create(ctx *gin.Context, req request.CreatePlanReq) (uint64, error) {
 	var (
-		o = orm.GetInstance()
+		o         = orm.GetInstance()
 		planModel model.Plan
-		err error
+		err       error
 	)
 	tx := o.Begin()
 	planModel.PlanName = req.PlanName
@@ -46,13 +45,13 @@ func (s *planService) GetList(ctx *gin.Context, req request.GetPlansReq) (plans 
 		o = orm.GetInstance()
 	)
 	o.Limit(10).Find(&plans)
-	for _,item := range plans {
+	for _, item := range plans {
 		o.Where("plan_id = ?", item.Id).Find(&item.PlanDetails)
 	}
 	return
 }
 
-func (s *planService) Fetch(ctx *gin.Context, id int) (plan model.Plan, err error){
+func (s *planService) Fetch(ctx *gin.Context, id int) (plan model.Plan, err error) {
 	var (
 		o = orm.GetInstance()
 	)
@@ -65,5 +64,3 @@ func (s *planService) Fetch(ctx *gin.Context, id int) (plan model.Plan, err erro
 func NewPlanService() *planService {
 	return &planService{}
 }
-
-

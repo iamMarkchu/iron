@@ -95,8 +95,8 @@
 ## 接口
 
 ### 用户模块
-- /api/users/register [post] 注册用户
-- /api/users/login [post] 登录用户
+- /api/register [post] 注册用户
+- /api/login [post] 登录用户
 - /api/users/:id [put] 修改用户信息
 - /api/users/forget [post] 忘记密码
 - /api/users/reset [post] 重置密码

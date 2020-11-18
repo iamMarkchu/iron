@@ -1,5 +1,5 @@
 package server
 
-func Init()  {
+func Init() {
 
 }

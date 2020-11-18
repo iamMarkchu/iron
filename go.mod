@@ -12,6 +12,7 @@ require (
 	github.com/jinzhu/gorm v1.9.16
 	github.com/json-iterator/go v1.1.10 // indirect
 	github.com/lib/pq v1.7.0 // indirect
+	github.com/silenceper/wechat/v2 v2.0.3
 	github.com/spf13/viper v1.7.1
 	github.com/ugorji/go v1.1.8 // indirect
 	golang.org/x/sys v0.0.0-20200909081042-eff7692f9009 // indirect

@@ -2,13 +2,12 @@ package service
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/iamMarkchu/iron/app/http/request"
+	"github.com/iamMarkchu/iron/app/lib/request"
 	"github.com/iamMarkchu/iron/app/model"
 	"github.com/iamMarkchu/iron/core/store/orm"
 )
 
 type categoryService struct {
-
 }
 
 func NewCategoryService() *categoryService {
@@ -17,7 +16,7 @@ func NewCategoryService() *categoryService {
 
 func (s *categoryService) Create(ctx *gin.Context, req request.CreateCategoryReq) (uint64, error) {
 	var (
-		o = orm.GetInstance()
+		o             = orm.GetInstance()
 		categoryModel model.Category
 	)
 	categoryModel.Name = req.Name
