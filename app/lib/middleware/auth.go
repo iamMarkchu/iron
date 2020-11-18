@@ -10,10 +10,10 @@ import (
 func AuthRequired() gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 		var (
-			token string
-			userId int
-			isValid  bool
-			err      error
+			token   string
+			userId  int
+			isValid bool
+			err     error
 		)
 		if token, err = request.AuthorizationHeaderExtractor.ExtractToken(ctx.Request); err != nil {
 			ctx.AbortWithStatusJSON(http.StatusBadRequest, gin.H{
