@@ -9,7 +9,7 @@ import (
 	"github.com/iamMarkchu/iron/app/http/user"
 	md "github.com/iamMarkchu/iron/app/lib/middleware"
 	"github.com/iamMarkchu/iron/core"
-	c "github.com/iamMarkchu/iron/core/config"
+	"github.com/spf13/viper"
 )
 
 func main() {
@@ -27,6 +27,7 @@ func main() {
 			api.POST("/users/reset", user.Reset)     // todo 用户密码重置
 			api.GET("/categories", category.GetList) // done 训练类别模块 获取类别列表
 			api.POST("/categories", category.Create) // done 训练类别模块 创建类别
+			api.GET("/topCategories", category.GetTopCate)  // 获取顶级类别
 			api.POST("/movements", movement.Create)  // done 训练动作模块 创建训练动作
 			api.GET("/movements", movement.GetList)  // done 训练动作模块 获取训练动作列表
 			api.POST("/plans", plan.Create)          // done 训练计划模块 创建训练计划
@@ -35,5 +36,5 @@ func main() {
 			api.POST("/trainings", training.Create)  //  训练模块 创建训练
 		}
 	}
-	r.Run(c.GetInstance().GetString("common.webPort"))
+	r.Run(viper.GetString("common.webPort"))
 }

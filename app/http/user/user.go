@@ -2,7 +2,7 @@ package user
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/iamMarkchu/iron/app/lib/request"
+	"github.com/iamMarkchu/iron/app/model/request"
 	"github.com/iamMarkchu/iron/app/service"
 	"github.com/iamMarkchu/iron/core/auth/jwt"
 	"net/http"

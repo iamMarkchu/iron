@@ -2,8 +2,8 @@ package movement
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/iamMarkchu/iron/app/lib/request"
 	"github.com/iamMarkchu/iron/app/model"
+	"github.com/iamMarkchu/iron/app/model/request"
 	"github.com/iamMarkchu/iron/app/service"
 	"net/http"
 )

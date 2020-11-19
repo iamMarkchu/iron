@@ -3,8 +3,8 @@ package service
 import (
 	"errors"
 	"github.com/gin-gonic/gin"
-	"github.com/iamMarkchu/iron/app/lib/request"
 	"github.com/iamMarkchu/iron/app/model"
+	"github.com/iamMarkchu/iron/app/model/request"
 	"github.com/iamMarkchu/iron/core/store/orm"
 )
 

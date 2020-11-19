@@ -2,7 +2,7 @@ package jwt
 
 import (
 	"github.com/dgrijalva/jwt-go"
-	"github.com/iamMarkchu/iron/core/config"
+	"github.com/spf13/viper"
 	"strconv"
 	"time"
 )
@@ -23,8 +23,8 @@ type Auth struct {
 }
 
 func Init()  {
-	key = []byte(config.GetInstance().GetString("jwt.key"))
-	issuer = config.GetInstance().GetString("jwt.issuer")
+	key = []byte(viper.GetString("jwt.key"))
+	issuer = viper.GetString("jwt.issuer")
 }
 
 func GetToken(userId int) (Auth, error) {

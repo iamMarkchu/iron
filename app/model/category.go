@@ -4,6 +4,8 @@ import "time"
 
 const (
 	StatusInit = 1
+
+	ContentEmpty = " "
 )
 
 type Category struct {
