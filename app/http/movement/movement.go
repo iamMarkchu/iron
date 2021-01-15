@@ -13,6 +13,7 @@ func Create(ctx *gin.Context) {
 		req             request.CreateMovementReq
 		movementService = service.NewMovementService()
 		id              uint64
+		uid             uint64
 		err             error
 	)
 	if err = ctx.ShouldBindJSON(&req); err != nil {
@@ -21,7 +22,14 @@ func Create(ctx *gin.Context) {
 		})
 		return
 	}
-	if id, err = movementService.Create(ctx, req); err != nil {
+	if uid = uint64(ctx.GetInt("userId")); uid == 0 {
+		ctx.JSON(http.StatusBadRequest, gin.H{
+			"code":    -1,
+			"message": "用户未登陆",
+		})
+		return
+	}
+	if id, err = movementService.Create(ctx, req, uid); err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{
 			"message": err,
 		})

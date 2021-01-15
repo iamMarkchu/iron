@@ -53,6 +53,7 @@ func (s *categoryService) valid(req request.CreateCategoryReq, uid uint64) (cm m
 		if !errors.Is(err, gorm.ErrRecordNotFound) {
 			return
 		}
+		err = nil
 	}
 	if res.Id > 0 {
 		err = errors.New("存在同名类别名称")
